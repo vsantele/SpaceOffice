@@ -1,0 +1,8 @@
+version: "3.1"
+
+services:
+  back:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "5907:443"
