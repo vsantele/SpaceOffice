@@ -9,7 +9,6 @@ export default function App() {
       <CssBaseline />
       <Router>
         <Routes>
-          {/* <Route path="/" element={<Task />} /> */}
           <Route path="/" element={<TestGrid />} />
         </Routes>
       </Router>

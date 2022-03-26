@@ -27,9 +27,9 @@ async function sendTask(task: string) {
   }
 }
 
-async function sendWeather(task: string) {
+async function sendWeather(weather: string) {
   try {
-    await connection.invoke('SendWeather', task);
+    await connection.invoke('SendWeather', weather);
   } catch (err) {
     console.log(err);
   }

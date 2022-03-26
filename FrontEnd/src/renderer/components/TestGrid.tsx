@@ -40,9 +40,10 @@ export default function TestGrid() {
     setOpen(false);
   };
 
-  function setReceivedWeather(receivedWeather: string) {
+  async function setReceivedWeather(receivedWeather: string) {
     var sentenceWeather: string = getSentenceByWeatherCode(receivedWeather);
     setWeather(sentenceWeather);
+    await window.electron.ipcRenderer.sendWeather(sentenceWeather);
   }
 
   function getSentenceByWeatherCode(code: string) {
