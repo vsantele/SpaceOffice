@@ -8,6 +8,7 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'no-console': 'off',
     'prettier/prettier': 'off',
+    'no-pluplus': 'off',
   },
   parserOptions: {
     ecmaVersion: 2020,
