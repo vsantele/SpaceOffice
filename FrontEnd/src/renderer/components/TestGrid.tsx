@@ -1,5 +1,5 @@
-import { Button, Checkbox, Grid } from '@mui/material';
-import { useState } from 'react';
+import { Alert, Grid, Snackbar } from '@mui/material';
+import React, { useState } from 'react';
 import '../App.css';
 import CitySelector from './CitySelector';
 import FormDialog from './FormDialog';
@@ -12,20 +12,22 @@ export default function TestGrid() {
   const [pathImg, setPathImg] = useState<any>('');
   const [weather, setWeather] = useState('');
 
+  const [open, setOpen] = useState(false);
+  const [snackbarContent, setSnackbarContent] = useState('');
+
   const {
     items: tasks,
     addItem: addTask,
     removeItem: deleteTask,
   } = useArray<string>();
 
-  const {
-    items: tasksToDelete,
-    addItem: addTaskToDelete,
-    removeItem: removeTaskToDelete,
-  } = useArray<string>();
+  const { items: tasksToDelete, removeItem: removeTaskToDelete } =
+    useArray<string>();
 
   const handleAddTask = async (task: string) => {
     addTask(task);
+    setOpen(true);
+    setSnackbarContent(`Your task :"${task}" has been sended`);
     await window.electron.ipcRenderer.sendTask(task);
   };
 
@@ -48,6 +50,10 @@ export default function TestGrid() {
     for (let i = 0; i < tasks.length; i++) {
       deleteTask(tasks[i]);
     }
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
   function setReceivedWeather(receivedWeather: string) {
@@ -123,7 +129,21 @@ export default function TestGrid() {
               Tasks list
             </h2>
             <FormDialog addTask={handleAddTask} />
-            {tasks.length > 0 && (
+            <Snackbar
+              open={open}
+              autoHideDuration={6000}
+              onClose={handleClose}
+              //message={snackbarContent}
+            >
+              <Alert
+                onClose={handleClose}
+                severity="success"
+                sx={{ width: '100%' }}
+              >
+                {snackbarContent}
+              </Alert>
+            </Snackbar>
+            {/* {tasks.length > 0 && (
               <ul>
                 {tasks.map((element) => (
                   <li key={element}>
@@ -143,7 +163,11 @@ export default function TestGrid() {
             )}
             {tasksToDelete.length > 0 && (
               <>
-                <Button variant="outlined" onClick={handleDelete}>
+                <Button
+                  variant="outlined"
+                  onClick={handleDelete}
+                  style={{ marginRight: '10px' }}
+                >
                   Delete
                 </Button>
               </>
@@ -152,7 +176,7 @@ export default function TestGrid() {
               <Button variant="outlined" onClick={handleDeleteAll}>
                 Delete All
               </Button>
-            )}
+            )} */}
           </div>
         </Grid>
       </Grid>
