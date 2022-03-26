@@ -8,11 +8,13 @@
  * When running `npm run build` or `npm run build:main`, this file is compiled to
  * `./src/main.js` using webpack. This gives us some performance wins.
  */
-import path from 'path';
-import { app, BrowserWindow, shell, ipcMain } from 'electron';
-import { autoUpdater } from 'electron-updater';
+import 'dotenv/config';
+import { app, BrowserWindow, ipcMain, shell } from 'electron';
 import log from 'electron-log';
+import { autoUpdater } from 'electron-updater';
+import path from 'path';
 import MenuBuilder from './menu';
+import { start } from './signalr';
 import { resolveHtmlPath } from './util';
 
 export default class AppUpdater {
@@ -126,7 +128,8 @@ app.on('window-all-closed', () => {
 
 app
   .whenReady()
-  .then(() => {
+  .then(async () => {
+    await start();
     createWindow();
     app.on('activate', () => {
       // On macOS it's common to re-create a window in the app when the
