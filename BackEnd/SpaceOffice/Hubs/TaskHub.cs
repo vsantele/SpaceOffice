@@ -4,7 +4,7 @@ namespace SpaceOffice.Hubs
 {
   public class TaskHub : Hub
   {
-    public async Task SendMessage(string task)
+    public async Task SendTask(string task)
     {
       await Clients.All.SendAsync("ReceiveTask", task);
     }
