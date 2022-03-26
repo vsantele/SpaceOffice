@@ -17,6 +17,11 @@ export default function Task() {
     removeItem: removeTaskToDelete,
   } = useArray<string>();
 
+  const handleAddTask = async (task: string) => {
+    addTask(task);
+    await window.electron.ipcRenderer.sendTask(task);
+  };
+
   const handleDelete = () => {
     for (let i = 0; i < tasksToDelete.length; i++) {
       deleteTask(tasksToDelete[i]);
@@ -39,7 +44,7 @@ export default function Task() {
       >
         Liste des Tâches
       </h2>
-      <FormDialog addTask={addTask} />
+      <FormDialog addTask={handleAddTask} />
       {tasks.length > 0 && (
         <Grid item xs={12} md={12}>
           <ul>

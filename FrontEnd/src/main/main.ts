@@ -14,7 +14,7 @@ import log from 'electron-log';
 import { autoUpdater } from 'electron-updater';
 import path from 'path';
 import MenuBuilder from './menu';
-import { start } from './signalr';
+import { sendTask, start } from './signalr';
 import { resolveHtmlPath } from './util';
 
 export default class AppUpdater {
@@ -31,6 +31,10 @@ ipcMain.on('ipc-example', async (event, arg) => {
   const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`;
   console.log(msgTemplate(arg));
   event.reply('ipc-example', msgTemplate('pong'));
+});
+
+ipcMain.handle('send-task', async (event, arg) => {
+  await sendTask(arg);
 });
 
 if (process.env.NODE_ENV === 'production') {
