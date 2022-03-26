@@ -24,8 +24,10 @@ export default function FormDialog(props: DialogProps) {
   };
 
   const addTask = () => {
-    if (task !== '') {
+    if (task !== '' && task.length > 0) {
       props.addTask(task);
+      handleClose();
+    } else {
       handleClose();
     }
   };
