@@ -44,6 +44,12 @@ export default function TestGrid() {
     }
   };
 
+  const handleDeleteAll = () => {
+    for (let i = 0; i < tasks.length; i++) {
+      deleteTask(tasks[i]);
+    }
+  };
+
   function setReceivedWeather(receivedWeather: string) {
     var sentenceWeather: string = getSentenceByWeatherCode(receivedWeather);
     setWeather(sentenceWeather);
@@ -136,8 +142,15 @@ export default function TestGrid() {
               </ul>
             )}
             {tasksToDelete.length > 0 && (
-              <Button variant="outlined" onClick={handleDelete}>
-                Delete
+              <>
+                <Button variant="outlined" onClick={handleDelete}>
+                  Delete
+                </Button>
+              </>
+            )}
+            {tasks.length > 0 && (
+              <Button variant="outlined" onClick={handleDeleteAll}>
+                Delete All
               </Button>
             )}
           </div>
