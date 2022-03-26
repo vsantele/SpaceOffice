@@ -9,7 +9,7 @@ contextBridge.exposeInMainWorld('electron', {
       ipcRenderer.invoke('send-task', task);
     },
     sendWeather(weather: string) {
-      ipcRenderer.invoke('send-task', weather);
+      ipcRenderer.invoke('send-weather', weather);
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     on(channel: string, func: (...args: any[]) => void) {
