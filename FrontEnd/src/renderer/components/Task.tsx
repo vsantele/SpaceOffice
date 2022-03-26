@@ -1,5 +1,5 @@
 import { Button, Checkbox, Grid } from '@mui/material';
-import React from 'react';
+import CitySelector from './CitySelector';
 import FormDialog from './FormDialog';
 import useArray from './useArray';
 
@@ -23,15 +23,23 @@ export default function Task() {
       removeTaskToDelete(tasksToDelete[i]);
     }
   };
-  console.log(tasksToDelete.length);
   return (
-    <Grid container justifyContent="center">
-      <Grid item xs={12} md={12}>
-        <h2>Task List</h2>
-      </Grid>
-      <Grid item xs={12} md={12}>
-        <FormDialog addTask={addTask} />
-      </Grid>
+    <div>
+      <div
+        style={{
+          height: '200px',
+        }}
+      >
+        <CitySelector />
+      </div>
+      <h2
+        style={{
+          textAlign: 'center',
+        }}
+      >
+        Liste des Tâches
+      </h2>
+      <FormDialog addTask={addTask} />
       {tasks.length > 0 && (
         <Grid item xs={12} md={12}>
           <ul>
@@ -45,12 +53,10 @@ export default function Task() {
         </Grid>
       )}
       {tasksToDelete.length > 0 && (
-        <Grid item xs={12} md={12}>
-          <Button variant="outlined" onClick={handleDelete}>
-            Delete
-          </Button>
-        </Grid>
+        <Button variant="outlined" onClick={handleDelete}>
+          Delete
+        </Button>
       )}
-    </Grid>
+    </div>
   );
 }
