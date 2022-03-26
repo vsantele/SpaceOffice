@@ -103,7 +103,9 @@ export default function TestGrid() {
             setPathImg={handleSetImgPath}
             setWeather={setReceivedWeather}
           />
-          {pathImg != '' && <WeatherCard city={city} imgSrc={pathImg} />}
+          {pathImg != '' && (
+            <WeatherCard city={city} imgSrc={pathImg} weather={weather} />
+          )}
         </Grid>
         <Grid item xs={12} md={6}>
           <div>

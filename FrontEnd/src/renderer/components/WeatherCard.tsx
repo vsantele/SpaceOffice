@@ -9,6 +9,7 @@ import * as React from 'react';
 interface WeatherProps {
   city: string;
   imgSrc: string;
+  weather: string;
 }
 
 export default function WeatherCard(props: WeatherProps) {
@@ -24,7 +25,7 @@ export default function WeatherCard(props: WeatherProps) {
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          This the weather of {props.city}
+          The weather of {props.city} : it is <b>{props.weather}</b>
         </Typography>
       </CardContent>
       <CardActions disableSpacing></CardActions>
