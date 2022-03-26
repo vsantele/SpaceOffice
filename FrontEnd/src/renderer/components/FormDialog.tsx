@@ -35,7 +35,7 @@ export default function FormDialog(props: DialogProps) {
         justifyContent: 'center',
       }}
     >
-      <Box sx={{ mx: 'auto' }}>
+      <Box sx={{ mx: 'auto', alignContent: 'right' }}>
         {' '}
         <Button
           style={{

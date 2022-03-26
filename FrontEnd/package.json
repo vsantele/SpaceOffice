@@ -230,7 +230,9 @@
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
     "@microsoft/signalr": "^6.0.3",
+    "@mui/icons-material": "^5.5.1",
     "@mui/material": "^5.5.2",
+    "@mui/styled-engine-sc": "^5.5.2",
     "dotenv": "^16.0.0",
     "electron-debug": "^3.2.0",
     "electron-log": "^4.4.6",
@@ -238,7 +240,8 @@
     "history": "^5.3.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-router-dom": "^6.2.2"
+    "react-router-dom": "^6.2.2",
+    "styled-components": "^5.3.5"
   },
   "devEngines": {
     "node": ">=14.x",

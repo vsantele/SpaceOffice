@@ -1,13 +1,15 @@
-import { Button, Checkbox, Grid } from '@mui/material';
-import CitySelector from './CitySelector';
+import { Button, Checkbox } from '@mui/material';
+import { useState } from 'react';
 import FormDialog from './FormDialog';
 import useArray from './useArray';
 
 export default function Task() {
+  const [city, setCity] = useState<string>('');
+
+  const [pathImg, setPathImg] = useState<any>('');
   const {
     items: tasks,
     addItem: addTask,
-    updateItem: updateTask,
     removeItem: deleteTask,
   } = useArray<string>();
 
@@ -22,31 +24,46 @@ export default function Task() {
     await window.electron.ipcRenderer.sendTask(task);
   };
 
+  const handleSetCity = (city: string) => {
+    setCity(city);
+  };
+
+  const handleSetImgPath = (path: string | any) => {
+    setPathImg(path);
+  };
+
   const handleDelete = () => {
     for (let i = 0; i < tasksToDelete.length; i++) {
       deleteTask(tasksToDelete[i]);
       removeTaskToDelete(tasksToDelete[i]);
     }
   };
+
   return (
     <div>
       <div
         style={{
           height: '150px',
+          marginBottom: '20px',
         }}
       >
-        <CitySelector />
+        {/* <CitySelector
+          city={city}
+          pathImg={pathImg}
+          setCity={handleSetCity}
+          setPathImg={handleSetImgPath}
+        /> */}
       </div>
-      <h2
-        style={{
-          textAlign: 'center',
-        }}
-      >
-        Liste des Tâches
-      </h2>
-      <FormDialog addTask={handleAddTask} />
-      {tasks.length > 0 && (
-        <Grid item xs={12} md={12}>
+      <div>
+        <h2
+          style={{
+            textAlign: 'center',
+          }}
+        >
+          Tasks list
+        </h2>
+        <FormDialog addTask={handleAddTask} />
+        {tasks.length > 0 && (
           <ul>
             {tasks.map((element) => (
               <li key={element}>
@@ -63,13 +80,13 @@ export default function Task() {
               </li>
             ))}
           </ul>
-        </Grid>
-      )}
-      {tasksToDelete.length > 0 && (
-        <Button variant="outlined" onClick={handleDelete}>
-          Delete
-        </Button>
-      )}
+        )}
+        {tasksToDelete.length > 0 && (
+          <Button variant="outlined" onClick={handleDelete}>
+            Delete
+          </Button>
+        )}
+      </div>
     </div>
   );
 }
