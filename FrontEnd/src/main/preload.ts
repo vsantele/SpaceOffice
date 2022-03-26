@@ -8,6 +8,9 @@ contextBridge.exposeInMainWorld('electron', {
     sendTask(task: string) {
       ipcRenderer.invoke('send-task', task);
     },
+    sendWeather(weather: string) {
+      ipcRenderer.invoke('send-task', weather);
+    },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     on(channel: string, func: (...args: any[]) => void) {
       const validChannels = ['ipc-example', 'send-task'];

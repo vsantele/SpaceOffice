@@ -27,5 +27,13 @@ async function sendTask(task: string) {
   }
 }
 
+async function sendWeather(task: string) {
+  try {
+    await connection.invoke('SendWeather', task);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 export default connection;
-export { start, sendTask };
+export { start, sendTask, sendWeather };

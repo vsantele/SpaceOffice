@@ -8,5 +8,10 @@ namespace SpaceOffice.Hubs
     {
       await Clients.All.SendAsync("ReceiveTask", task);
     }
+
+    public async Task SendWeather(string weather)
+    {
+      await Clients.All.SendAsync("ReceiveWeather", weather);
+    }
   }
 }

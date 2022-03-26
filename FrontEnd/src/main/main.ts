@@ -14,7 +14,7 @@ import log from 'electron-log';
 import { autoUpdater } from 'electron-updater';
 import path from 'path';
 import MenuBuilder from './menu';
-import { sendTask, start } from './signalr';
+import { sendTask, sendWeather, start } from './signalr';
 import { resolveHtmlPath } from './util';
 
 export default class AppUpdater {
@@ -35,6 +35,10 @@ ipcMain.on('ipc-example', async (event, arg) => {
 
 ipcMain.handle('send-task', async (event, arg) => {
   await sendTask(arg);
+});
+
+ipcMain.handle('send-weather', async (event, arg) => {
+  await sendWeather(arg);
 });
 
 if (process.env.NODE_ENV === 'production') {
