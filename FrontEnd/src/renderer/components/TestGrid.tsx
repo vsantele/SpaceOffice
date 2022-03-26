@@ -22,10 +22,12 @@ export default function TestGrid() {
   } = useArray<string>();
 
   const handleAddTask = async (task: string) => {
-    addTask(task);
-    setOpen(true);
-    setSnackbarContent(`Your task : "${task}" has been sended`);
-    await window.electron.ipcRenderer.sendTask(task);
+    if (task.length >= 0) {
+      addTask(task);
+      setOpen(true);
+      setSnackbarContent(`Your task : "${task}" has been sended`);
+      await window.electron.ipcRenderer.sendTask(task);
+    }
   };
 
   const handleSetCity = (city: string) => {
