@@ -91,19 +91,7 @@ export default function TestGrid() {
   return (
     <>
       <Grid container spacing={2} justifyContent={'center'}>
-        <Grid item xs={12} md={6}>
-          <CitySelector
-            city={city}
-            pathImg={pathImg}
-            setCity={handleSetCity}
-            setPathImg={handleSetImgPath}
-            setWeather={setReceivedWeather}
-          />
-          {pathImg != '' && (
-            <WeatherCard city={city} imgSrc={pathImg} weather={weather} />
-          )}
-        </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={12}>
           <div>
             <h2
               style={{
@@ -128,6 +116,18 @@ export default function TestGrid() {
               </Alert>
             </Snackbar>
           </div>
+        </Grid>
+        <Grid item xs={12} md={12}>
+          <CitySelector
+            city={city}
+            pathImg={pathImg}
+            setCity={handleSetCity}
+            setPathImg={handleSetImgPath}
+            setWeather={setReceivedWeather}
+          />
+          {pathImg != '' && (
+            <WeatherCard city={city} imgSrc={pathImg} weather={weather} />
+          )}
         </Grid>
       </Grid>
     </>
