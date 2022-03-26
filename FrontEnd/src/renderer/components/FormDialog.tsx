@@ -1,4 +1,5 @@
 import { TextField } from '@mui/material/';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -29,10 +30,24 @@ export default function FormDialog(props: DialogProps) {
     }
   };
   return (
-    <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Add task
-      </Button>
+    <div
+      style={{
+        justifyContent: 'center',
+      }}
+    >
+      <Box sx={{ mx: 'auto' }}>
+        {' '}
+        <Button
+          style={{
+            textAlign: 'center',
+          }}
+          variant="outlined"
+          onClick={handleClickOpen}
+        >
+          Add task
+        </Button>
+      </Box>
+
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Add task</DialogTitle>
         <DialogContent>
