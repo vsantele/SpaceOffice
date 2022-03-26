@@ -45,8 +45,53 @@ export default function TestGrid() {
   };
 
   function setReceivedWeather(receivedWeather: string) {
-    setWeather(receivedWeather);
+    var sentenceWeather: string = getSentenceByWeatherCode(receivedWeather);
+    setWeather(sentenceWeather);
   }
+
+  function getSentenceByWeatherCode(code: string) {
+    switch (code) {
+      case '01':
+        return 'sunny';
+        break;
+
+      case '02':
+        return 'sunny';
+        break;
+
+      case '03':
+        return 'cloudy';
+        break;
+
+      case '04':
+        return 'cloudy';
+        break;
+
+      case '09':
+        return 'rainy';
+        break;
+
+      case '10':
+        return 'rainy';
+        break;
+
+      case '11':
+        return 'rainy';
+        break;
+
+      case '13':
+        return 'snowy';
+        break;
+
+      case '50':
+        return 'cloudy';
+        break;
+
+      default:
+        return 'no data';
+    }
+  }
+
   return (
     <>
       <Grid container spacing={2} justifyContent={'center'}>
