@@ -21,13 +21,10 @@ export default function TestGrid() {
     removeItem: deleteTask,
   } = useArray<string>();
 
-  const { items: tasksToDelete, removeItem: removeTaskToDelete } =
-    useArray<string>();
-
   const handleAddTask = async (task: string) => {
     addTask(task);
     setOpen(true);
-    setSnackbarContent(`Your task :"${task}" has been sended`);
+    setSnackbarContent(`Your task : "${task}" has been sended`);
     await window.electron.ipcRenderer.sendTask(task);
   };
 
@@ -37,19 +34,6 @@ export default function TestGrid() {
 
   const handleSetImgPath = (path: string | any) => {
     setPathImg(path);
-  };
-
-  const handleDelete = () => {
-    for (let i = 0; i < tasksToDelete.length; i++) {
-      deleteTask(tasksToDelete[i]);
-      removeTaskToDelete(tasksToDelete[i]);
-    }
-  };
-
-  const handleDeleteAll = () => {
-    for (let i = 0; i < tasks.length; i++) {
-      deleteTask(tasks[i]);
-    }
   };
 
   const handleClose = () => {
@@ -143,40 +127,6 @@ export default function TestGrid() {
                 {snackbarContent}
               </Alert>
             </Snackbar>
-            {/* {tasks.length > 0 && (
-              <ul>
-                {tasks.map((element) => (
-                  <li key={element}>
-                    <Checkbox
-                      onClick={() => {
-                        if (tasksToDelete.indexOf(element) >= 0) {
-                          removeTaskToDelete(element);
-                        } else {
-                          addTaskToDelete(element);
-                        }
-                      }}
-                    />
-                    {element}
-                  </li>
-                ))}
-              </ul>
-            )}
-            {tasksToDelete.length > 0 && (
-              <>
-                <Button
-                  variant="outlined"
-                  onClick={handleDelete}
-                  style={{ marginRight: '10px' }}
-                >
-                  Delete
-                </Button>
-              </>
-            )}
-            {tasks.length > 0 && (
-              <Button variant="outlined" onClick={handleDeleteAll}>
-                Delete All
-              </Button>
-            )} */}
           </div>
         </Grid>
       </Grid>
