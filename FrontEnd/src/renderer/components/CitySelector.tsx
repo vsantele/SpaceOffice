@@ -7,11 +7,13 @@ interface CityProps {
   pathImg: any | string;
   setCity: Function;
   setPathImg: Function;
+  setWeather: Function;
 }
 
 export default function CitySelector(props: CityProps) {
   const handleChange = async (dataItem: any, index: any) => {
     const weatherIcon = await getTownData(index.key.slice(2, index.key.length));
+    props.setWeather(weatherIcon);
     props.setCity(dataItem.target.value);
     props.setPathImg(getIconWeather(weatherIcon));
   };

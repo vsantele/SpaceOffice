@@ -10,6 +10,7 @@ export default function TestGrid() {
   const [city, setCity] = useState<string>('');
 
   const [pathImg, setPathImg] = useState<any>('');
+  const [weather, setWeather] = useState('');
 
   const {
     items: tasks,
@@ -43,6 +44,9 @@ export default function TestGrid() {
     }
   };
 
+  function setReceivedWeather(receivedWeather: string) {
+    setWeather(receivedWeather);
+  }
   return (
     <>
       <Grid container spacing={2} justifyContent={'center'}>
@@ -52,6 +56,7 @@ export default function TestGrid() {
             pathImg={pathImg}
             setCity={handleSetCity}
             setPathImg={handleSetImgPath}
+            setWeather={setReceivedWeather}
           />
           {pathImg != '' && <WeatherCard city={city} imgSrc={pathImg} />}
         </Grid>

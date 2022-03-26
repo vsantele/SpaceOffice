@@ -1,6 +1,5 @@
 import { Button, Checkbox } from '@mui/material';
 import { useState } from 'react';
-import CitySelector from './CitySelector';
 import FormDialog from './FormDialog';
 import useArray from './useArray';
 
@@ -48,12 +47,12 @@ export default function Task() {
           marginBottom: '20px',
         }}
       >
-        <CitySelector
+        {/* <CitySelector
           city={city}
           pathImg={pathImg}
           setCity={handleSetCity}
           setPathImg={handleSetImgPath}
-        />
+        /> */}
       </div>
       <div>
         <h2
