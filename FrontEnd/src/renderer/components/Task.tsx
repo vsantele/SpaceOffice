@@ -27,7 +27,7 @@ export default function Task() {
     <div>
       <div
         style={{
-          height: '200px',
+          height: '150px',
         }}
       >
         <CitySelector />
