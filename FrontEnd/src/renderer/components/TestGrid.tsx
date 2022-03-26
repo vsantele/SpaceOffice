@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import '../App.css';
 import CitySelector from './CitySelector';
 import FormDialog from './FormDialog';
-import useArray from './useArray';
 import WeatherCard from './WeatherCard';
 
 export default function TestGrid() {
@@ -15,21 +14,17 @@ export default function TestGrid() {
   const [open, setOpen] = useState(false);
   const [snackbarContent, setSnackbarContent] = useState('');
 
-  const {
-    items: tasks,
-    addItem: addTask,
-    removeItem: deleteTask,
-  } = useArray<string>();
+  const [task, setTask] = useState('');
 
-  const handleAddTask = async (task: string) => {
-    addTask(task);
+  const handleAddTask = async (newTask: string) => {
+    setTask(newTask);
+    setSnackbarContent(`Your task : "${newTask}" has been sended`);
     setOpen(true);
-    setSnackbarContent(`Your task : "${task}" has been sended`);
-    await window.electron.ipcRenderer.sendTask(task);
+    await window.electron.ipcRenderer.sendTask(newTask);
   };
 
-  const handleSetCity = (city: string) => {
-    setCity(city);
+  const handleSetCity = (newCity: string) => {
+    setCity(newCity);
   };
 
   const handleSetImgPath = (path: string | any) => {
@@ -40,58 +35,40 @@ export default function TestGrid() {
     setOpen(false);
   };
 
-  async function setReceivedWeather(receivedWeather: string) {
-    var sentenceWeather: string = getSentenceByWeatherCode(receivedWeather);
-    setWeather(sentenceWeather);
-    await window.electron.ipcRenderer.sendWeather(sentenceWeather);
-  }
-
   function getSentenceByWeatherCode(code: string) {
     switch (code) {
       case '01':
         return 'sunny';
-        break;
-
       case '02':
         return 'sunny';
-        break;
-
       case '03':
         return 'cloudy';
-        break;
-
       case '04':
         return 'cloudy';
-        break;
-
       case '09':
         return 'rainy';
-        break;
-
       case '10':
         return 'rainy';
-        break;
-
       case '11':
         return 'rainy';
-        break;
-
       case '13':
         return 'snowy';
-        break;
-
       case '50':
         return 'cloudy';
-        break;
-
       default:
         return 'no data';
     }
   }
 
+  const setReceivedWeather = async (receivedWeather: string) => {
+    const sentenceWeather: string = getSentenceByWeatherCode(receivedWeather);
+    setWeather(sentenceWeather);
+    await window.electron.ipcRenderer.sendWeather(sentenceWeather);
+  };
+
   return (
     <>
-      <Grid container spacing={2} justifyContent={'center'}>
+      <Grid container spacing={2} justifyContent="center">
         <Grid item xs={12} md={12}>
           <div>
             <h2
@@ -102,11 +79,12 @@ export default function TestGrid() {
               Tasks list
             </h2>
             <FormDialog addTask={handleAddTask} />
+            <p>Last Tak: {task}</p>
             <Snackbar
               open={open}
               autoHideDuration={6000}
               onClose={handleClose}
-              //message={snackbarContent}
+              // message={snackbarContent}
             >
               <Alert
                 onClose={handleClose}
@@ -126,7 +104,7 @@ export default function TestGrid() {
             setPathImg={handleSetImgPath}
             setWeather={setReceivedWeather}
           />
-          {pathImg != '' && (
+          {pathImg !== '' && (
             <WeatherCard city={city} imgSrc={pathImg} weather={weather} />
           )}
         </Grid>
