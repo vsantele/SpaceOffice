@@ -45,7 +45,15 @@ export default function Task() {
           <ul>
             {tasks.map((element) => (
               <li key={element}>
-                <Checkbox onClick={() => addTaskToDelete(element)} />
+                <Checkbox
+                  onClick={() => {
+                    if (tasksToDelete.indexOf(element) >= 0) {
+                      removeTaskToDelete(element);
+                    } else {
+                      addTaskToDelete(element);
+                    }
+                  }}
+                />
                 {element}
               </li>
             ))}
