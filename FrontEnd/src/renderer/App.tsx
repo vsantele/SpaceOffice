@@ -1,7 +1,7 @@
 import { Container, CssBaseline } from '@mui/material';
 import { MemoryRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
-import Task from './components/Task';
+import TestGrid from './components/TestGrid';
 
 export default function App() {
   return (
@@ -9,7 +9,8 @@ export default function App() {
       <CssBaseline />
       <Router>
         <Routes>
-          <Route path="/" element={<Task />} />
+          {/* <Route path="/" element={<Task />} /> */}
+          <Route path="/" element={<TestGrid />} />
         </Routes>
       </Router>
     </Container>
