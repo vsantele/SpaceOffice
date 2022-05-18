@@ -18,11 +18,17 @@ export default function TestGrid() {
   const [task, setTask] = useState("")
 
   const handleAddTask = async (newTask: string) => {
-    setTask(newTask)
-    setSnackbarContent(`Your task : "${newTask}" has been sended`)
-    setOpen(true)
-    // await window.electron.ipcRenderer.sendTask(newTask);
-    sendTask(newTask)
+    try {
+      await sendTask(newTask)
+      setSnackbarContent(`Your task : "${newTask}" has been sended`)
+      setTask(newTask)
+    } catch (e) {
+      setSnackbarContent(`Unable to send task : "${newTask}"`)
+      console.error(e)
+    }
+    finally {
+      setOpen(true)
+    }
   }
 
   const handleSetCity = (newCity: string) => {
