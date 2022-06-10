@@ -8,7 +8,8 @@ export default defineConfig(({ command, mode }) => {
   // Set the third parameter to '' to load all env regardless of the `VITE_` prefix.
   const env = loadEnv(mode, process.cwd(), '')
   return {
-    plugins:[react()],
+    plugins: [react()],
+    base: mode === 'production' ? '/front/' : '/',
     server: {
       proxy: {
         '/api': {
